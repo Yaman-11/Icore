@@ -4,8 +4,11 @@ package com.example.testing.Testing.Controller;
 import com.example.testing.Testing.Entity.Book;
 import com.example.testing.Testing.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -20,10 +23,10 @@ public class BookController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST,value="/add")
-    public String add(@RequestBody Book book)
+    @RequestMapping(method = RequestMethod.POST,value="/add",produces = "application/json")
+    public ResponseEntity<List<Book>> add(@RequestBody Book book)
     {
-        return bookService.add(book);
+    return bookService.add(book);
     }
 
     @RequestMapping(method = RequestMethod.GET,value="/find/{id}",produces = "application/json")
